@@ -12,7 +12,7 @@ var d = -1;
 var legend = false;
 var songtitle = false;
 
-var can, logo;
+var can, logo, flowerlegend;
 
 function preload() {
   table = loadTable("NEEDYDATA.csv", "csv", "header");
@@ -20,6 +20,7 @@ function preload() {
   song = loadSound('needySong.mp3');
   can = loadImage('water-can-cursor.png');
   logo = loadImage('logo-small.png');
+  flowerlegend = loadImage('flowerlegend.png');
 }
 
 function setup() {
@@ -215,11 +216,13 @@ function draw() {
 
   // 'SEE' BUTTON TOGGLES LEGEND
   if (legend) {
+   textAlign(CENTER);
     fill(255);
-    rect(width/2, height/2, width/2+50, height/3+10);
+    rect(width/2, height/2, width*3/4, height/2);
+    let leg = image(flowerlegend, width/2, height/2-24, width*2/5, (width*2/5)*795/900); 
+    textSize(9);
     fill(0);
-    textSize(24);
-    text("Catalogue of Flowers", width/2, height/3+30);
+    text("This data was taken in September 2021. Based on text messages between me and my closest loved ones.", width/2, height*4/5-10, width/2-12, height/4);
   }
 
   // 'HEAR' BUTTON TOGGLES SONG
