@@ -194,12 +194,10 @@ function draw() {
   // 'SEE' BUTTON TOGGLES LEGEND
   if (legend) {
     textAlign(CENTER);
-    fill(255);
-    rect(width/2, height/2, width*3/4, height/2);
-    let leg = image(flowerlegend, width/2, height/2-24, width*2/5, (width*2/5)*795/900); 
-    textSize(9);
+    let leg = image(flowerlegend, width/2, height/2-24, (height/3+30)*900/795, height/3+30); 
+    textSize(7.5);
     fill(0);
-    text("This data was taken in September 2021. Based on text messages between me and my closest loved ones.", width/2, height*4/5-10, width/2-12, height/4);
+    text("This data was taken in September 2021. Based on text messages between me and my closest loved ones.", width/2, height*4/5, width/2-12, height/4);
 }
 
   // 'HEAR' BUTTON TOGGLES SONG
