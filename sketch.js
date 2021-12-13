@@ -1,3 +1,4 @@
+
 let table, font;
 let totalRows;
 
@@ -48,7 +49,6 @@ function setup() {
   let tabletest = table.getArray();
   totalRows = table.getRowCount();
 
-  var protection = 0;
   for (let i = 0; i < totalRows; i++) {
     var dot = {
     x:
@@ -58,27 +58,7 @@ function setup() {
     r:
     8
   };
-
-  var overlapping = false;
-
-  for (let j = 0; j < dots.length; j++) {
-    // an 'overlapping check' with 'other' circles
-    var other = dots[j];
-    let d = dist(dot.x, dot.y, other.x, other.y);
-    //indication that it is overlapping
-    if (d < 30) {
-      overlapping = true;
-      break;
-    }
-  }
-
-  if (overlapping == false) {
-    dots.push(dot);
-  }
-  protection++;
-  if (protection >= 500) {
-    break;
-  }
+dots.push(dot);
 }
 
 }
@@ -121,7 +101,7 @@ function draw() {
     //WHITE DAISIES - EXCLAMATION POINTS
     let exc = table.getString(i, "!");
     if (exc != 0) {
-      daisy(dots[i].x, dots[i].y, exc, 0, 0, 255);
+      daisy(dots[i].x, dots[i].y, exc, 1.5, "green", '#f2f2e6');
     }
 
     //PINK ROSES - LOVE EMOJIS
@@ -157,25 +137,22 @@ function draw() {
     } else if (sender == "Housies1" || sender == "Housies2") {
       fill("orange");
     } else if (sender == "Besties1" || sender == "Besties2" || sender == "Besties3") {
-      fill(255, 255, 0);
+      fill("yellow");
     }
-    strokeWeight(0.1);
+    strokeWeight(0.15);
     ellipse(dots[i].x, dots[i].y, dots[i].r, dots[i].r);
 
     //WHAT APPEARS ON HOVER
-    push();
+    
     if (mouseX >= dots[i].x-10 && mouseX <= dots[i].x + 10 && mouseY >= dots[i].y-10 && mouseY <= dots[i].y + 10) {
       //rotate(-45);
       image(can, mouseX+15, mouseY-30, 36, 36);
-    } else if (mouseX == dots[i].x && mouseY == dots[i].y) {
-      rotate(-45);
-      image(can, mouseX+15, mouseY-30, 36, 36);
-
     }
-    pop();
+  
     
   }
 
+  push();
   // TITLE & SUBHEADINGS
   rectMode(CENTER);
   fill(255);
@@ -193,13 +170,13 @@ function draw() {
   let subtitle = "Hover your mouse around for a surprise (or hold down if you're on mobile). But careful! Clicking makes them shy.";
   text(subtitle, width/2, height-100, 300, 120);
   image(logo, 75, 50, 36, 36);
-
+  pop();
   // 'READ' BUTTON TOGGLES DESCRIPTION
   if (d >= 0) {
   var desc1 = "Around the time the world entered the digital era, we started to teach ourselves that being ‘cool’ was about being nonchalant. We wait hours before we text back. We don’t want to say too much, show too much. Don’t show too much effort. In other words, don’t come off as ‘needy’.";
-  var desc2 = "It tells us that as humans, we crave affection, yet we keep each other at arm’s length. We become unfazed or stoic in an effort to be adult, sensible, guarded, if not a little bit mysterious. It’s a challenge I have failed many many times. I over-text. I put smile emojis in work emails. I ask questions one too many times. In-person or online, I’m either saying the wrong thing or too many things.";
-  var desc3 = "Who is this garden for? I guess I dedicate it to anyone who has ever felt like they were “too much”. Like the were somehow “a lot to handle”. Especially if they’ve ever thought it’s what makes them flawed or less likely to be loved. In a very similar vein I too worry about blunders and ‘much’-ness: phrasing an awkward sentence to a colleague, sharing an obscure deeper fact about myself a second too soon…";
-  var desc4 = "If I may suggest: It’s very human to be needy. To want our friendships & relationships to be felt, embraced, validated. We have a collective need for each other, and it’s okay for that to show. We might realise that after all, it’s not lame to care. And that caring, needing, asking, reaching out, unashamedly being, is what leads to colourful, messy, beautiful, unexpected growth.";
+  var desc2 = "It tells us that we crave affection, yet we keep each other at arm’s length. We become unfazed or stoic in an effort to be adult, sensible, guarded, if not a little bit mysterious. It’s a challenge I have failed many many times. I over-text. I put smile emojis in work emails. I ask questions one too many times. In-person or online, I’m either saying the wrong thing or too many things.";
+  var desc3 = "Who is this garden for? I guess I dedicate it to anyone who has ever felt like they were “too much”. Like they were somehow 'a lot to handle'. and especially if they’ve ever thought it makes them flawed or less likely to be loved. In a similar vein I too worry about blunders and ‘much’-ness: phrasing an awkward sentence to a colleague, sharing an obscure deeper fact about myself a second too soon…";
+  var desc4 = "If I may suggest: It’s human to be needy. To want our friendships & relationships to be felt, embraced, validated. It's okay to let our collective need for each other show (and grow). We might realise that after all, it’s not lame to care. And that caring, needing, asking, reaching out, unashamedly being, is what leads to colourful, messy, beautiful, unexpected growth.";
   var descs = [desc1, desc2, desc3, desc4];
     push();
     fill(255);
@@ -216,17 +193,19 @@ function draw() {
 
   // 'SEE' BUTTON TOGGLES LEGEND
   if (legend) {
-   textAlign(CENTER);
+    textAlign(CENTER);
     fill(255);
     rect(width/2, height/2, width*3/4, height/2);
     let leg = image(flowerlegend, width/2, height/2-24, width*2/5, (width*2/5)*795/900); 
     textSize(9);
     fill(0);
     text("This data was taken in September 2021. Based on text messages between me and my closest loved ones.", width/2, height*4/5-10, width/2-12, height/4);
-  }
+}
 
   // 'HEAR' BUTTON TOGGLES SONG
   if (songtitle) {
+    fill(0);
+    textAlign(CENTER);
     text("Playing: 'Days Aren't Long Enough' by Thomas Dybdahl and Lera Lynn.", width/2, height-120);
   }
 
